@@ -1,0 +1,32 @@
+import re
+
+
+def my_sort(len, arr, out):
+    for i in range(len - 1):
+        j = i + 1
+        kek = [max(arr) + 1, 0]
+        while j < len:
+            if arr[j] < arr[i] and arr[j] < kek[0]:
+                kek = [arr[j], j]
+            j += 1
+        if kek[1] > 0:
+            arr[kek[1]], arr[i] = arr[i], arr[kek[1]]
+            out.write('Swap elements at indices ' + str(i + 1) + ' and ' + str(kek[1] + 1) + '.\n')
+        else:
+            continue
+
+
+with open('input.txt', 'r') as inp:
+    n = int(inp.readline())
+    f = inp.readline()
+    f = re.split(r' ', f)
+    f = [int(i) for i in f]
+
+with open('output.txt', 'w') as out:
+    my_sort(n, f, out)
+    out.write('No more swaps needed.\n')
+    f = [str(i) for i in f]
+    out.write(' '.join(f))
+
+inp.close()
+out.close()
